@@ -1,0 +1,50 @@
+type OrderItem {
+    itemId: string
+    item: string
+    price: number
+    qty: number
+}
+enum OrderStatus{
+    OPEN
+    IN_PROGRESS
+    DONE
+    CANCEL
+}
+type Order{
+    orderId?: string
+    restaurantId: string
+    customerId: string
+    orderDTime: Date
+    orderStatusUpdateDTime: Date
+    orderItems: Array<OrderItem> | []
+    totalCost: number
+    finalCost: number
+    discount?: number
+    status: OrderStatus
+}
+type CreateOrderDto {
+    restaurantId: string
+    customerId: string
+    orderItems: Array<OrderItem> | []
+    totalCost: number
+    finalCost: number
+    discount: number
+    status: OrderStatus
+}
+type UpdateOrderDto {
+    orderId: string
+    itemId: string 
+    newQty: number
+}
+
+type Query {
+  FetchOrder()
+  FetchOrderById(orderId: string)
+}
+
+type Mutation {
+  createOrder(orderDto: CreateOrderDto!): User!
+  updateOrderStatus(orderId: string, status: OrderStatus): Order
+  updateOrderItem(updateObject: UpdateOrderDto): Order
+  deleteOrderById(id: string): number
+}

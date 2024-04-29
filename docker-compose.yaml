@@ -1,0 +1,8 @@
+version: '3'
+services:
+  nestjs-app-foodzap:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - ./.env
